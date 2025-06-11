@@ -1,0 +1,22 @@
+modules:
+  - waf_detection
+  - sql_injection
+  - command_injection
+  - xss
+  - directory_traversal
+  - lfi
+  - rfi
+  - xxe
+  - cookie_tampering
+  - login_bruteforce
+
+metasploit:
+  enabled: false          # turn true if msfrpcd running
+  host: "127.0.0.1"
+  port: 55552            # default msfrpcd port
+  password: "msfpass"
+
+threads: 10
+output:
+  format: ["json", "pdf"]
+  directory: "reports/"
