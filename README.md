@@ -1,4 +1,4 @@
-# Octo Dark Cyber Squad Web Vuln Scanner & Exploit
+# Octo Dark Cyber Squad Web Vuln Scanner & Exploit (BETA)
 
 🛠️ Interactive, advanced web vulnerability scanner with modular design, multi-threaded crawling, proxy support, auto-exploitation, and reporting.
 
