@@ -1,0 +1,26 @@
+target: https://example.com
+modules:
+  - xss
+  - sqli
+  - command_injection
+  - lfi
+  - rfi
+  - directory_traversal
+  - cookie_tampering
+  - xxe
+
+auth:
+  enabled: false
+  login_url: ""
+  username_field: ""
+  password_field: ""
+  credentials:
+    username: ""
+    password: ""
+
+proxies:
+  enabled: false
+  sources: []
+
+report:
+  format: [pdf, json]
