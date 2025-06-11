@@ -1,7 +1,7 @@
-import sys, urllib3, concurrent.futures
-from utils.crawler import SimpleCrawler
+import sys
 import urllib3
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+import concurrent.futures
+from utils.crawler import AdvancedCrawler  # <- Use the upgraded crawler
 
 # ── disable SSL warnings (self-signed certs etc.) ────────────────────
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -31,8 +31,7 @@ BANNER = r"""
     👤 Made by: Ariyan Bin Bappy
     ☠️  Group: Octo Dark Cyber Squad
     ⚠️  For authorized testing only 
-        Buy Cpanel and Upload deface by making ssh servince in cpanel
-   """
+"""
 
 # ── tiny URL-filter helpers ──────────────────────────────────────────
 has_q     = lambda u: '?' in u
@@ -55,7 +54,7 @@ MODULES = {
 
 def menu():
     print("\n=== Select attack type ===")
-    for k in sorted(MODULES, key=lambda x:int(x)):
+    for k in sorted(MODULES, key=lambda x: int(x)):
         print(f" {k}. {MODULES[k][0]}")
     print(" 0. Exit")
     return input("Choice: ").strip()
@@ -63,8 +62,8 @@ def menu():
 def main():
     print(BANNER)
     base = input("Enter BASE URL (e.g., https://example.com): ").strip()
-    if not base.startswith("http"):
-        print("[!] Must start with http:// or https://")
+    if not base.startswith("http://") and not base.startswith("https://"):
+        print("[!] URL must start with http:// or https://")
         sys.exit(1)
 
     while True:
@@ -78,9 +77,9 @@ def main():
 
         name, scan_fn, filt = MODULES[choice]
 
-        # ── fresh crawl for this attack ──────────────────────────────
+        # ── crawling ────────────────────────────────────────────────
         print(f"\n[*] Crawling {base} for {name} …")
-        crawler = SimpleCrawler(base, max_depth=2, delay=0.4)
+        crawler = AdvancedCrawler(base_url=base, max_depth=3, delay=0.3)
         urls = crawler.crawl()
         targets = [u for u in urls if filt(u)]
         print(f"[+] {len(urls)} URLs found, {len(targets)} relevant to {name}.")
@@ -89,7 +88,7 @@ def main():
             print("[!] Nothing to test.\n")
             continue
 
-        # ── multithreaded scanning ───────────────────────────────────
+        # ── multithreaded scanning ─────────────────────────────────
         print(f"[*] Running {name} module with 10 threads …")
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as pool:
             future_to_url = {pool.submit(scan_fn, u): u for u in targets}
@@ -97,10 +96,10 @@ def main():
                 url = future_to_url[future]
                 try:
                     res = future.result()
+                    if res:
+                        print(f"\n--- {url} ---\n{res}")
                 except Exception as exc:
-                    print(f"[!] {url} generated exception: {exc}")
-                else:
-                    print(f"\n--- {url} ---\n{res}")
+                    print(f"[!] {url} raised exception: {exc}")
 
 if __name__ == "__main__":
     main()
