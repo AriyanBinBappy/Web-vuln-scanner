@@ -18,6 +18,6 @@
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/octo-vuln-scanner.git
+git clone https://github.com/AriyanBinBappy/octo-vuln-scanner.git
 cd octo-vuln-scanner
 # Web-vuln-scanner
