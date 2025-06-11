@@ -31,6 +31,7 @@ BANNER = r"""
     👤 Made by: Ariyan Bin Bappy
     ☠️  Group: Octo Dark Cyber Squad
     ⚠️  For authorized testing only 
+        Buy Cpanel and Upload deface by making ssh servince in cpanel
    """
 
 # ── tiny URL-filter helpers ──────────────────────────────────────────
