@@ -1,0 +1,34 @@
+# Core Web Requests
+requests>=2.31.0
+urllib3>=2.0.7
+
+# HTML Parsing and Crawling
+beautifulsoup4>=4.12.2
+lxml>=5.1.0
+
+# PDF Reporting
+fpdf2>=2.7.8
+
+# Terminal Colors (if used in logging)
+colorama>=0.4.6
+
+# Metasploit RPC Client (if using auto-exploitation)
+msgpack>=1.0.7
+
+# YAML Config Support
+pyyaml>=6.0.1
+
+# Retry and Timeout Helpers
+tenacity>=8.2.3
+
+# Progress Bars (optional enhancement)
+tqdm>=4.66.2
+
+# Authentication and HTML Parsing
+mechanize>=0.4.9
+
+# HTML form manipulation (optional, used for bruteforce modules)
+html5lib>=1.1
+
+# Threaded crawling and scheduling helpers (optional)
+concurrent-log-handler>=0.9.24
